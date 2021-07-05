@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>img</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/holder/2.3.1/holder.js'></script>
+    <style>
+        #container {
+            width: 600px;
+            height: 600px;
+        }
+        #wrapper {
+            width: 600px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: url("<%= image_url %>");
+            background-repeat: no-repeat;
+            object-fit: cover;
+        }
+
+        #title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba( 255, 255, 255, 0.5 );
+        }
+
+        #titleBorder {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 500px;
+            height: 500px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #title_main {
+            display: inline-block;
+            text-align: center;
+            font-size: 36pt;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: rgba( 0, 0, 0, 1 );
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+      <img id="wrapper" src="<%= image_url %>" alt="img">
+        <div id="title">
+          <p id="title_main"><%= title_main %></p>
+        </div>
+        <div id="titleBorder"></div>
+    </div>
+
+    <p><%= image_url %></p>
+    <p><%= title_main %></p>
+    <p><%= title_sub %></p>
+    <p><%= bg_color %></p>
+    <p><%= font_color %></p>
+
+    <script>
+        window.onload = function () {
+            const wrapper = document.getElementById("wrapper");
+        }
+
+    </script>
+</body>
+</html>
