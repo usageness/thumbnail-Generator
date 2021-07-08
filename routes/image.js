@@ -1,3 +1,4 @@
+// var html2canvas = require("html2canvas");
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
@@ -13,6 +14,16 @@ router.post('/', function(req, res, next) {
   const title_sub = req.body.title_sub;
   const bg_color = req.body.bg_color;
   const font_color = req.body.font_color;
+/*
+  html2canvas(document.getElementById("container"), {
+    onrendered: function (canvas) {
+      let a = document.createElement('a');
+      a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      a.download = "out.png";
+      a.click();
+    }
+  });
+*/
 
   res.render('img', {
     image_url: image_url,

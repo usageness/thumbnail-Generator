@@ -3,22 +3,22 @@
 <head>
     <title>img</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/holder/2.3.1/holder.js'></script>
+    <script src="/javascripts/html2canvas.js"></script>
     <style>
-
         #container {
             width: 600px;
             height: 600px;
         }
         #wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 600px;
             height: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-image: url("<%= image_url %>");
-            background-repeat: no-repeat;
             object-fit: cover;
         }
 
@@ -50,6 +50,7 @@
             font-size: 36pt;
             font-weight: bolder;
             margin: 0;
+            padding: 0 .5rem;
             color: <%= font_color %>;
             background-color: rgba( 0, 0, 0, 0 );
         }
@@ -60,6 +61,7 @@
             font-size: 24pt;
             font-weight: bold;
             margin: 0;
+            padding: 0 .5rem;
             color: <%= font_color %>;
             background-color: rgba( 0, 0, 0, 0 );
         }
@@ -67,12 +69,13 @@
 </head>
 <body>
     <div id="container">
-      <img id="wrapper" src="<%= image_url %>" alt="img">
+      <div id="wrapper" style="background-image:url(<%= image_url %>)">
         <div id="title">
           <p id="title_main"><%= title_main %></p>
           <p id="title_sub"><%= title_sub %></p>
         </div>
         <div id="titleBorder"></div>
+      </div>
     </div>
 
     <p><%= image_url %></p>
@@ -90,9 +93,29 @@
         window.onload = function () {
             const titleMain = document.getElementById("title_main");
             const titleSub = document.getElementById("title_sub");
+            const wrapper = document.getElementById("wrapper");
             titleMain.style.backgroundColor = value;
             titleSub.style.backgroundColor = value;
+            //wrapper.crossOrigin = 'anonymous';
+
+            window.setTimeout(capture, 2000);
         }
+
+        function capture() {
+            html2canvas(document.getElementById("wrapper"), {
+                logging: true,
+                letterRendering: 1,
+                allowTaint: true,
+                useCORS: true
+            })
+                .then(canvas => {
+                let a = document.createElement('a');
+                a.href = canvas.toDataURL("image/png");
+                a.download = "out.png";
+                a.click();
+            });
+        }
+
     </script>
 </body>
 </html>
