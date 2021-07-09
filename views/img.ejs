@@ -3,7 +3,6 @@
 <head>
     <title>img</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/html2canvas.js"></script>
     <style>
         #container {
             width: 600px;
@@ -93,27 +92,8 @@
         window.onload = function () {
             const titleMain = document.getElementById("title_main");
             const titleSub = document.getElementById("title_sub");
-            const wrapper = document.getElementById("wrapper");
             titleMain.style.backgroundColor = value;
             titleSub.style.backgroundColor = value;
-            //wrapper.crossOrigin = 'anonymous';
-
-            window.setTimeout(capture, 2000);
-        }
-
-        function capture() {
-            html2canvas(document.getElementById("wrapper"), {
-                logging: true,
-                letterRendering: 1,
-                allowTaint: true,
-                useCORS: true
-            })
-                .then(canvas => {
-                let a = document.createElement('a');
-                a.href = canvas.toDataURL("image/png");
-                a.download = "out.png";
-                a.click();
-            });
         }
 
     </script>
