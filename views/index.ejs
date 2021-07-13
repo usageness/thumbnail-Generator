@@ -7,29 +7,30 @@
   <body>
     <h1>썸네일 생성기</h1>
     <p>간단한 작업만으로 썸네일 이미지를 생성합니다.</p>
-    <form name="form" action="/img/req" method="post">
+    <div class="inputForm">
+      <form name="form" action="/img/req" method="post">
 
-      <label for="image_file">이미지 파일</label>
-      <input id="image_file" type="file" name="image_file" accept="image/*">
+        <label for="image_url">이미지 주소</label>
+        <input id="image_url" type="text" name="image_url" placeholder="배경 이미지 주소">
 
-      <label for="image_url">이미지 주소</label>
-      <input id="image_url" type="text" name="image_url" placeholder="배경 이미지 주소">
+        <label for="title_main">제목</label>
+        <input id="title_main" type="text" name="title_main" placeholder="제목">
 
-      <label for="title_main">제목</label>
-      <input id="title_main" type="text" name="title_main" placeholder="제목">
+        <label for="title_sub">부제목</label>
+        <input id="title_sub" type="text" name="title_sub" placeholder="부제목">
 
-      <label for="title_sub">부제목</label>
-      <input id="title_sub" type="text" name="title_sub" placeholder="부제목">
+        <label for="bg_color">텍스트 배경 색상</label>
+        <input id="bg_color" type="color" name="bg_color" placeholder="">
 
-      <label for="bg_color">배경 색상</label>
-      <input id="bg_color" type="color" name="bg_color" placeholder="">
+        <label for="font_color">폰트 색상</label>
+        <input id="font_color" type="color" name="font_color" placeholder="">
 
-      <label for="font_color">폰트 색상</label>
-      <input id="font_color" type="color" name="font_color" placeholder="">
+        <p>텍스트 배경 색상 <strong>투명</strong>을 체크하면 배경 색상이 나타나지 않습니다.</p>
 
-      <input id="submit" type="submit" name="submit" value="확인">
+        <input id="submit" type="submit" name="submit" value="썸네일 생성">
 
-    </form>
+      </form>
+    </div>
     <h2>유의 사항</h2>
     <ul>
       <li>사용하신 배경 이미지의 권리에 대하여 썸네일 생성기는 책임을 지지 않습니다. <strong>배경 이미지의 사용 범위</strong>를 꼭 확인해주세요.</li>

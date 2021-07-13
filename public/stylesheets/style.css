@@ -3,8 +3,55 @@
 body {
   margin: 0;
   font-family: "Nanum Gothic", sans-serif;
+  text-align: center;
 }
 
 a {
   color: #00B7FF;
+}
+
+li {
+  list-style: none;
+}
+
+input[type=text] {
+  display: block;
+  width: 90%;
+  padding: .5rem;
+  margin: 1rem;
+  border-radius: .25rem;
+  border: 1px solid #999999;
+}
+
+input[type=color] {
+  display: block;
+  padding: .5rem 0;
+  margin: 1rem;
+  border-radius: .25rem;
+}
+
+input[type=submit] {
+  display: block;
+  width: 50%;
+  padding: .5rem;
+  margin: auto;
+  border-radius: .25rem;
+  color: #FFFFFF;
+  font-size: 16pt;
+  background-color: #529eea;
+  border: 1px solid #999999;
+}
+
+input[type=submit]:hover {
+  background-color: #70aeec;
+}
+
+.inputForm {
+  width: 40%;
+  padding: 3rem;
+  background-color: lightyellow;
+  text-align: left;
+  margin: auto;
+  border-radius: .5rem;
+  border: 1px solid #999999;
 }
