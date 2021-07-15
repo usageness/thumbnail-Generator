@@ -1,18 +1,17 @@
-// var html2canvas = require("html2canvas");
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var puppeteer = require('puppeteer');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const puppeteer = require('puppeteer');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('잘못된 요청입니다.');
 });
 
-router.post('/', async function(req, res, next) {
+router.post('/', function(req, res, next) {
   const image_url = req.body.image_url;
   const title_main = req.body.title_main;
-  const title_sub = req.body.title_sub;
+  const title_sub = req.body.title_sub;:
   const bg_color = req.body.bg_color;
   const font_color = req.body.font_color;
 
