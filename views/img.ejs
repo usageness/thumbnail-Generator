@@ -85,9 +85,15 @@
 
     <script>
         let value = "<%= bg_color %>";
+        let opacity = "<%= bg_opacity %>";
         value = value.match(/[A-Za-z0-9]{2}/g);
         value = value.map(function(v) { return parseInt(v, 16) });
-        value = "rgba(" + value.join(",") + ",1)";
+        if(opacity === "bg_opacity") {
+            opacity = 0;
+        }else{
+            opacity = 1;
+        }
+        value = "rgba(" + value.join(",") + "," + opacity + ")";
 
         window.onload = function () {
             const titleMain = document.getElementById("title_main");

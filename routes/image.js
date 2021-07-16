@@ -11,8 +11,9 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   const image_url = req.body.image_url;
   const title_main = req.body.title_main;
-  const title_sub = req.body.title_sub;:
+  const title_sub = req.body.title_sub;
   const bg_color = req.body.bg_color;
+  const bg_opacity = req.body.bg_opacity;
   const font_color = req.body.font_color;
 
   res.render('img', {
@@ -20,6 +21,7 @@ router.post('/', function(req, res, next) {
     title_main: title_main,
     title_sub: title_sub,
     bg_color: bg_color,
+    bg_opacity: bg_opacity,
     font_color: font_color
   });
 });
@@ -29,6 +31,7 @@ router.post('/req', async function(req, res, next) {
   const title_main = req.body.title_main;
   const title_sub = req.body.title_sub;
   const bg_color = req.body.bg_color;
+  const bg_opacity = req.body.bg_opacity;
   const font_color = req.body.font_color;
 
   const browser = await puppeteer.launch({
@@ -43,7 +46,7 @@ router.post('/req', async function(req, res, next) {
   await page.once("request", interceptedRequest => {
     interceptedRequest.continue({
       method: "POST",
-      postData: 'image_url=' + image_url + '&title_main=' + title_main + '&title_sub=' + title_sub + '&bg_color=' + bg_color + '&font_color' + font_color,
+      postData: 'image_url=' + image_url + '&title_main=' + title_main + '&title_sub=' + title_sub + '&bg_color=' + bg_color + '&bg_opacity=' + bg_opacity + '&font_color' + font_color,
       headers: {
         ...interceptedRequest.headers(),
         "Content-Type": "application/x-www-form-urlencoded"
