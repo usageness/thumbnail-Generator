@@ -14,5 +14,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "puppeteer": "^10.1.0"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }
