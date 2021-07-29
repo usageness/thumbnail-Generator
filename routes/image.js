@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
   const bg_color = req.body.bg_color;
   const bg_opacity = req.body.bg_opacity;
   const font_color = req.body.font_color;
+  const font_shadow = req.body.font_shadow;
 
   res.render('img', {
     image_url: image_url,
@@ -22,7 +23,8 @@ router.post('/', function(req, res, next) {
     title_sub: title_sub,
     bg_color: bg_color,
     bg_opacity: bg_opacity,
-    font_color: font_color
+    font_color: font_color,
+    font_shadow: font_shadow
   });
 });
 
@@ -33,6 +35,7 @@ router.post('/req', async function(req, res, next) {
   const bg_color = req.body.bg_color;
   const bg_opacity = req.body.bg_opacity;
   const font_color = req.body.font_color;
+  const font_shadow = req.body.font_shadow;
 
   const browser = await puppeteer.launch({
     args: ["--enable-features=NetworkService", "--no-sandbox"],
@@ -46,7 +49,7 @@ router.post('/req', async function(req, res, next) {
   await page.once("request", interceptedRequest => {
     interceptedRequest.continue({
       method: "POST",
-      postData: 'image_url=' + image_url + '&title_main=' + title_main + '&title_sub=' + title_sub + '&bg_color=' + bg_color + '&bg_opacity=' + bg_opacity + '&font_color' + font_color,
+      postData: 'image_url=' + image_url + '&title_main=' + title_main + '&title_sub=' + title_sub + '&bg_color=' + bg_color + '&bg_opacity=' + bg_opacity + '&font_color=' + font_color + '&font_shadow=' + font_shadow,
       headers: {
         ...interceptedRequest.headers(),
         "Content-Type": "application/x-www-form-urlencoded"
