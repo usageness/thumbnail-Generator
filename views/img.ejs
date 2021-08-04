@@ -101,7 +101,10 @@
             const titleSub = document.getElementById("title_sub");
             titleMain.style.backgroundColor = value;
             titleSub.style.backgroundColor = value;
-            if(shadow === "font_shadow") titleMain.style.textShadow = "2px 2px 2px #000000";
+            if(shadow === "font_shadow") {
+                titleMain.style.textShadow = "2px 2px 2px #000000";
+                titleSub.style.textShadow = "2px 2px 2px #000000";
+            }
         }
 
     </script>
