@@ -15,7 +15,7 @@ npm run start
 
 서버를 가동한 뒤 localhost:3000 으로 접속합니다.
 
-![image](https://user-images.githubusercontent.com/28296575/125153703-9d910800-e190-11eb-9881-3489c3233fca.png)
+![image](https://user-images.githubusercontent.com/28296575/132858993-30802799-6917-4048-8eb0-3718ab5f7cab.png)
 
 배경으로 사용될 이미지 주소, 제목, 부제목, 배경 색상, 폰트 색상을 입력하고
 
