@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./src"
+  },
+  "include": ["src/*", "src/types/global.d.ts"],
+  "exclude": ["node_modules/*"]
+}
