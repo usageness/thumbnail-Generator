@@ -1,25 +1,33 @@
+import { useState } from 'react';
+
+import ThumbnailData from '../../types/thumbnail';
 import Preview from './Preview';
 import Sidebar from './Sidebar';
 
-interface ThumbnailData {
-  imageSize: '16:9' | '4:3';
-  backgroundType: 'Color' | 'Gradient' | 'Image';
-  backgroundImageSrc: string;
-  backgroundColor: string;
-  backgroundGradint: string;
-  title: string;
-  subtitle: string;
-  fontColor: string;
-  fontBackgroundColor: string;
-  hasFontBackgroundColor: boolean;
-  hasFontShadow: boolean;
-}
+const defaultThumbnailData: ThumbnailData = {
+  imageSize: null,
+  backgroundType: null,
+  backgroundImageSrc: null,
+  backgroundColor: null,
+  backgroundGradint: null,
+  title: null,
+  subtitle: null,
+  fontColor: null,
+  fontBackgroundColor: null,
+  hasFontBackgroundColor: null,
+  hasFontShadow: null,
+};
 
 function Main() {
+  const [thumbnailData, setThumbnailData] = useState(defaultThumbnailData);
+
   return (
     <>
-      <Sidebar />
-      <Preview />
+      <Sidebar
+        thumbnailData={thumbnailData}
+        setThumbnailData={setThumbnailData}
+      />
+      {/* <Preview thumbnailData={thumbnailData} /> */}
       {/* <div className="inputForm">
         <form name="form" action="/img/req" method="post">
           <label htmlFor="image_url">이미지 주소</label>
