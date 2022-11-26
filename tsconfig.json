@@ -9,6 +9,6 @@
     "sourceMap": true,
     "baseUrl": "./src"
   },
-  "include": ["src/*", "src/types/global.d.ts"],
+  "include": ["src", "src/*"],
   "exclude": ["node_modules/*"]
 }
