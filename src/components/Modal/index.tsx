@@ -9,7 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const modalAnimationTime = 150;
+export const modalAnimationTime = 150;
 
 function Modal({ modalState, children }: ModalProps): JSX.Element {
   const modalObject = useContext(ModalContext);

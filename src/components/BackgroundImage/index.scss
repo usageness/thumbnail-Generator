@@ -1,0 +1,15 @@
+@import '~/styles/variables';
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin: 2rem 0;
+}
+
+.guideMessage {
+  font-size: 0.8rem;
+
+  color: $GRAY_005;
+}
