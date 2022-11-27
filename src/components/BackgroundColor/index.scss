@@ -1,0 +1,48 @@
+@import '~/styles/variables';
+
+.labelContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.tabButtonContainer {
+  display: flex;
+
+  margin: 1rem 0;
+
+  .active {
+    background-color: $GREEN_000;
+  }
+
+  button {
+    height: 2rem;
+  }
+}
+
+.colorPickerContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.singleInputContainer {
+  display: flex;
+  justify-content: space-between;
+
+  & > label {
+    display: flex;
+    align-items: center;
+  }
+
+  & > input {
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
