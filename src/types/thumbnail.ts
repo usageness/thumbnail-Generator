@@ -1,15 +1,15 @@
 interface ThumbnailData {
-  imageSize: '16:9' | '4:3' | null;
+  imageSize: '16:9' | '4:3' | '1:1';
   backgroundType: 'Color' | 'Gradient' | 'Image' | null;
-  backgroundImageSrc: string | null;
-  backgroundColor: string | null;
-  backgroundGradint: string | null;
-  title: string | null;
-  subtitle: string | null;
-  fontColor: string | null;
-  fontBackgroundColor: string | null;
-  hasFontBackgroundColor: boolean | null;
-  hasFontShadow: boolean | null;
+  backgroundImageSrc: string;
+  backgroundColor: string;
+  backgroundGradint: { start: string; end: string };
+  title: string;
+  subtitle: string;
+  fontColor: string;
+  fontBackgroundColor: string;
+  hasFontBackgroundColor: boolean;
+  hasFontShadow: boolean;
 }
 
 export default ThumbnailData;

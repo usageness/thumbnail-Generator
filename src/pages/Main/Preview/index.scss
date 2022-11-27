@@ -1,0 +1,34 @@
+@import '~/styles/variables';
+
+.container {
+  display: flex;
+
+  width: 75%;
+}
+
+.debugContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  position: fixed;
+
+  padding: 1rem;
+  box-sizing: border-box;
+
+  color: $WHITE_000;
+  background-color: #888888dd;
+}
+
+.canvasContainer {
+  display: flex;
+  justify-content: center;
+
+  width: 60%;
+  height: auto;
+
+  border: 2px dotted $RED_001;
+  box-sizing: border-box;
+
+  margin: auto;
+}
