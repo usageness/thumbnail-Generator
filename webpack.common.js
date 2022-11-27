@@ -24,6 +24,10 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
+      {
+        test: /\.svg/,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
@@ -34,6 +38,9 @@ module.exports = {
       types: path.resolve(__dirname, './src/types'),
       utils: path.resolve(__dirname, './src/utils'),
       pages: path.resolve(__dirname, './src/pages'),
+      hooks: path.resolve(__dirname, './src/hooks'),
+      stores: path.resolve(__dirname, './src/stores'),
+      components: path.resolve(__dirname, './src/components'),
     },
   },
   output: {
