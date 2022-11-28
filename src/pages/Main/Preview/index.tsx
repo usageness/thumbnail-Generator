@@ -15,11 +15,10 @@ function Preview() {
     useBackgroundImageSrc,
     useBackgroundColor,
     useBackgroundGradint,
+    useBackgroundBlur,
     useTitle,
     useSubtitle,
     useFontColor,
-    useFontBackgroundColor,
-    useHasFontBackgroundColor,
     useHasFontShadow,
   } = thumbnailData;
   const { modalFlag } = modalObject;
@@ -29,15 +28,14 @@ function Preview() {
   const { backgroundImageSrc } = useBackgroundImageSrc();
   const { backgroundColor } = useBackgroundColor();
   const { backgroundGradint } = useBackgroundGradint();
+  const { backgroundBlur } = useBackgroundBlur();
   const { title } = useTitle();
   const { subtitle } = useSubtitle();
   const { fontColor } = useFontColor();
-  const { fontBackgroundColor } = useFontBackgroundColor();
-  const { hasFontBackgroundColor } = useHasFontBackgroundColor();
   const { hasFontShadow } = useHasFontShadow();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const canvasWrapperRef = useRef<HTMLDivElement>(null);
 
   const loadBackgroundImage = () => {
     return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -55,12 +53,15 @@ function Preview() {
   useEffect(() => {
     const asyncWrapper = async () => {
       const canvas = canvasRef.current;
+      const canvasContainer = canvasWrapperRef.current;
 
-      if (!canvas) return;
+      if (!canvas || !canvasContainer) return;
 
       const context = canvas.getContext('2d');
 
       if (!context) return;
+
+      canvasContainer.style.aspectRatio = imageSize.replace(':', '/');
 
       if (backgroundType === 'Color') {
         context.fillStyle = backgroundColor;
@@ -82,11 +83,31 @@ function Preview() {
 
       if (backgroundType === 'Image') {
         const img = await loadBackgroundImage();
-        context.drawImage(img, 0, 0);
+
+        context.fillStyle = backgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
       }
 
-      context.font = '24px NanumBarunGothic';
+      context.font = 'bold 24px NanumBarunGothic';
       context.textAlign = 'center';
+
+      context.shadowColor = 'rgba(0, 0, 0, 0)';
+      context.shadowOffsetX = 0;
+      context.shadowOffsetY = 0;
+
+      if (backgroundBlur) {
+        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      if (hasFontShadow) {
+        console.log('shadow on');
+        context.shadowColor = 'black';
+        context.shadowOffsetX = 1;
+        context.shadowOffsetY = 1;
+      }
+
       context.fillStyle = `${fontColor}`;
       context.fillText(title, canvas.width / 2, canvas.height / 2);
 
@@ -101,18 +122,12 @@ function Preview() {
     backgroundImageSrc,
     backgroundColor,
     backgroundGradint,
+    backgroundBlur,
     title,
     subtitle,
     fontColor,
+    hasFontShadow,
   ]);
-
-  useEffect(() => {
-    const canvasContainer = canvasContainerRef.current;
-
-    if (!canvasContainer) return;
-
-    canvasContainer.style.aspectRatio = imageSize.replace(':', '/');
-  }, [imageSize]);
 
   return (
     <div className={styles.container}>
@@ -125,16 +140,38 @@ function Preview() {
         <p>
           backgroundGradint: {backgroundGradint.start} / {backgroundGradint.end}
         </p>
+        <p>backgroundBlur: {backgroundBlur.toString()}</p>
         <p>title: {title}</p>
         <p>subtitle: {subtitle}</p>
         <p>fontColor: {fontColor}</p>
-        <p>fontBackgroundColor: {fontBackgroundColor}</p>
-        <p>hasFontBackgroundColor: {hasFontBackgroundColor.toString()}</p>
         <p>hasFontShadow: {hasFontShadow.toString()}</p>
         <p>modalFlag: {modalFlag}</p>
       </div>
-      <div className={styles.canvasContainer} ref={canvasContainerRef}>
-        <canvas ref={canvasRef} />
+      <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
+        <div className={styles.canvasRatio}>
+          {imageSize === '16:9' ? (
+            <canvas
+              className={styles.canvas}
+              width="640"
+              height="360"
+              ref={canvasRef}
+            />
+          ) : imageSize === '4:3' ? (
+            <canvas
+              className={styles.canvas}
+              width="600"
+              height="450"
+              ref={canvasRef}
+            />
+          ) : (
+            <canvas
+              className={styles.canvas}
+              width="600"
+              height="600"
+              ref={canvasRef}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

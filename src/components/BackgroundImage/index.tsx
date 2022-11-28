@@ -23,6 +23,11 @@ function BackgroundImage() {
 
     const imageUrl = urlRef.current.value;
 
+    if (!imageUrl.trim) {
+      alert('이미지 주소를 먼저 입력해주세요.');
+      return;
+    }
+
     setBackgroundImageSrc(imageUrl);
     setBackgroundType('Image');
     close();
@@ -43,7 +48,12 @@ function BackgroundImage() {
         <p className={styles.guideMessage}>
           배경 이미지의 사용 범위를 꼭 확인해주세요.
         </p>
-        <button onClick={changeBackgroundImageSrc}>적용</button>
+        <button
+          className={styles.submitButton}
+          onClick={changeBackgroundImageSrc}
+        >
+          적용
+        </button>
       </div>
     </Modal>
   );

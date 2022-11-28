@@ -4,11 +4,10 @@ interface ThumbnailData {
   backgroundImageSrc: string;
   backgroundColor: string;
   backgroundGradint: { start: string; end: string };
+  backgroundBlur: boolean;
   title: string;
   subtitle: string;
   fontColor: string;
-  fontBackgroundColor: string;
-  hasFontBackgroundColor: boolean;
   hasFontShadow: boolean;
 }
 

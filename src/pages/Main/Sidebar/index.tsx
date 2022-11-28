@@ -18,11 +18,10 @@ function Sidebar() {
     useBackgroundImageSrc,
     useBackgroundColor,
     useBackgroundGradint,
+    useBackgroundBlur,
     useTitle,
     useSubtitle,
     useFontColor,
-    useFontBackgroundColor,
-    useHasFontBackgroundColor,
     useHasFontShadow,
   } = thumbnailData;
   const { showBackgroundColorModal, showBackgroundImageModal } = modalObject;
@@ -32,17 +31,18 @@ function Sidebar() {
   const { backgroundImageSrc, setBackgroundImageSrc } = useBackgroundImageSrc();
   const { backgroundColor, setBackgroundColor } = useBackgroundColor();
   const { backgroundGradint, setBackgroundGradint } = useBackgroundGradint();
+  const { backgroundBlur, setBackgroundBlur } = useBackgroundBlur();
   const { title, setTitle } = useTitle();
   const { subtitle, setSubtitle } = useSubtitle();
   const { fontColor, setFontColor } = useFontColor();
-  const { fontBackgroundColor, setFontBackgroundColor } =
-    useFontBackgroundColor();
-  const { hasFontBackgroundColor, setHasFontBackgroundColor } =
-    useHasFontBackgroundColor();
   const { hasFontShadow, setHasFontShadow } = useHasFontShadow();
 
   const changeImageSize = (newSize: ThumbnailData['imageSize']) => {
     setImageSize(newSize);
+  };
+
+  const changeBackgroundBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBackgroundBlur(prev => !prev);
   };
 
   const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,18 +55,6 @@ function Sidebar() {
 
   const changeFontColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFontColor(e.target.value);
-  };
-
-  const changeFontBackgroundColor = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setFontBackgroundColor(e.target.value);
-  };
-
-  const changeHasFontBackgroundColor = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setHasFontBackgroundColor(prev => !prev);
   };
 
   const changeHasFontShadow = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,6 +120,17 @@ function Sidebar() {
           이미지
         </div>
       </div>
+      <div className={styles.singleInputContainer}>
+        <label htmlFor="background_blur">배경 흐리게</label>
+        <input
+          id="background_blur"
+          type="checkbox"
+          name="background_blur"
+          value="background_blur"
+          checked={backgroundBlur}
+          onChange={changeBackgroundBlur}
+        />
+      </div>
       <div className={styles.titleContainer}>
         <h3>제목</h3>
         <input
@@ -153,35 +152,13 @@ function Sidebar() {
         />
       </div>
       <div className={styles.singleInputContainer}>
-        <label htmlFor="font_color">폰트 색상</label>
+        <label htmlFor="font_color">글자 색</label>
         <input
           id="font_color"
           type="color"
           name="font_color"
           onChange={changeFontColor}
           placeholder=""
-        />
-      </div>
-      <div className={styles.singleInputContainer}>
-        <label htmlFor="bg_color">텍스트 배경 색상</label>
-        <input
-          id="bg_color"
-          type="color"
-          name="bg_color"
-          value={fontBackgroundColor}
-          onChange={changeFontBackgroundColor}
-          placeholder=""
-        />
-      </div>
-      <div className={styles.singleInputContainer}>
-        <label htmlFor="bg_opacity">배경색 없음</label>
-        <input
-          id="bg_opacity"
-          type="checkbox"
-          name="bg_opacity"
-          checked={hasFontBackgroundColor}
-          onChange={changeHasFontBackgroundColor}
-          placeholder="배경색 없음"
         />
       </div>
       <div className={styles.singleInputContainer}>
@@ -193,7 +170,6 @@ function Sidebar() {
           value="font_shadow"
           checked={hasFontShadow}
           onChange={changeHasFontShadow}
-          placeholder="그림자 효과"
         />
       </div>
       <div className={styles.submitButtonContainer}>
