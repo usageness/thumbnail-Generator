@@ -48,6 +48,18 @@ export interface useThumbnailReturnValues {
       React.SetStateAction<ThumbnailData['subtitle']>
     >;
   };
+  useFontSize: () => {
+    fontSize: ThumbnailData['fontSize'];
+    setFontSize: React.Dispatch<
+      React.SetStateAction<ThumbnailData['fontSize']>
+    >;
+  };
+  useFontFamily: () => {
+    fontFamily: ThumbnailData['fontFamily'];
+    setFontFamily: React.Dispatch<
+      React.SetStateAction<ThumbnailData['fontFamily']>
+    >;
+  };
   useFontColor: () => {
     fontColor: ThumbnailData['fontColor'];
     setFontColor: React.Dispatch<
@@ -71,6 +83,8 @@ const defaultThumbnailData: ThumbnailData = {
   backgroundBlur: false,
   title: '',
   subtitle: '',
+  fontSize: 'Small',
+  fontFamily: '나눔고딕체',
   fontColor: '#000000',
   hasFontShadow: false,
 };
@@ -94,6 +108,8 @@ const useThumbnail = (): useThumbnailReturnValues => {
   );
   const [title, setTitle] = useState(defaultThumbnailData.title);
   const [subtitle, setSubtitle] = useState(defaultThumbnailData.subtitle);
+  const [fontSize, setFontSize] = useState(defaultThumbnailData.fontSize);
+  const [fontFamily, setFontFamily] = useState(defaultThumbnailData.fontFamily);
   const [fontColor, setFontColor] = useState(defaultThumbnailData.fontColor);
   const [hasFontShadow, setHasFontShadow] = useState(
     defaultThumbnailData.hasFontShadow,
@@ -124,7 +140,6 @@ const useThumbnail = (): useThumbnailReturnValues => {
       backgroundBlur,
       setBackgroundBlur,
     }),
-
     useTitle: () => ({
       title,
       setTitle,
@@ -132,6 +147,14 @@ const useThumbnail = (): useThumbnailReturnValues => {
     useSubtitle: () => ({
       subtitle,
       setSubtitle,
+    }),
+    useFontSize: () => ({
+      fontSize,
+      setFontSize,
+    }),
+    useFontFamily: () => ({
+      fontFamily,
+      setFontFamily,
     }),
     useFontColor: () => ({
       fontColor,

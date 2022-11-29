@@ -14,27 +14,23 @@ function Sidebar() {
 
   const {
     useImageSize,
-    useBackgroundType,
-    useBackgroundImageSrc,
-    useBackgroundColor,
-    useBackgroundGradint,
     useBackgroundBlur,
     useTitle,
     useSubtitle,
+    useFontSize,
+    useFontFamily,
     useFontColor,
     useHasFontShadow,
   } = thumbnailData;
   const { showBackgroundColorModal, showBackgroundImageModal } = modalObject;
 
   const { imageSize, setImageSize } = useImageSize();
-  const { backgroundType, setBackgroundType } = useBackgroundType();
-  const { backgroundImageSrc, setBackgroundImageSrc } = useBackgroundImageSrc();
-  const { backgroundColor, setBackgroundColor } = useBackgroundColor();
-  const { backgroundGradint, setBackgroundGradint } = useBackgroundGradint();
   const { backgroundBlur, setBackgroundBlur } = useBackgroundBlur();
-  const { title, setTitle } = useTitle();
-  const { subtitle, setSubtitle } = useSubtitle();
-  const { fontColor, setFontColor } = useFontColor();
+  const { setTitle } = useTitle();
+  const { setSubtitle } = useSubtitle();
+  const { setFontSize } = useFontSize();
+  const { setFontFamily } = useFontFamily();
+  const { setFontColor } = useFontColor();
   const { hasFontShadow, setHasFontShadow } = useHasFontShadow();
 
   const changeImageSize = (newSize: ThumbnailData['imageSize']) => {
@@ -51,6 +47,20 @@ function Sidebar() {
 
   const changeSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubtitle(e.target.value);
+  };
+
+  const changeFontSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // TODO: 나중에 타입 추론 제대로 해주기
+    const selectedSize = e.target.value as ThumbnailData['fontSize'];
+
+    setFontSize(selectedSize);
+  };
+
+  const changeFontFamily = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // TODO: 나중에 타입 추론 제대로 해주기
+    const selectedFamily = e.target.value as ThumbnailData['fontFamily'];
+
+    setFontFamily(selectedFamily);
   };
 
   const changeFontColor = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,6 +162,21 @@ function Sidebar() {
         />
       </div>
       <div className={styles.singleInputContainer}>
+        <label htmlFor="font_size">글자 크기</label>
+        <select name="font_size" onChange={changeFontSize}>
+          <option value="Small">작음</option>
+          <option value="Normal">보통</option>
+          <option value="Big">큼</option>
+        </select>
+      </div>
+      <div className={styles.singleInputContainer}>
+        <label htmlFor="font_family">폰트 스타일</label>
+        <select name="font_family" onChange={changeFontFamily}>
+          <option value="나눔고딕체">나눔고딕체</option>
+          <option value="도현체">도현체</option>
+        </select>
+      </div>
+      <div className={styles.singleInputContainer}>
         <label htmlFor="font_color">글자 색</label>
         <input
           id="font_color"
@@ -176,7 +201,12 @@ function Sidebar() {
         <button onClick={() => alert('준비중입니다')}>
           최근 설정 불러오기
         </button>
-        <button className={styles.submitButton}>썸네일 생성</button>
+        <button
+          className={styles.submitButton}
+          onClick={() => alert('준비중입니다')}
+        >
+          썸네일 생성
+        </button>
       </div>
     </div>
   );

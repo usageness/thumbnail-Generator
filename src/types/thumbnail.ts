@@ -7,6 +7,8 @@ interface ThumbnailData {
   backgroundBlur: boolean;
   title: string;
   subtitle: string;
+  fontSize: 'Small' | 'Normal' | 'Big';
+  fontFamily: '나눔고딕체' | '도현체';
   fontColor: string;
   hasFontShadow: boolean;
 }

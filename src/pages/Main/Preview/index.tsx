@@ -18,6 +18,8 @@ function Preview() {
     useBackgroundBlur,
     useTitle,
     useSubtitle,
+    useFontSize,
+    useFontFamily,
     useFontColor,
     useHasFontShadow,
   } = thumbnailData;
@@ -31,6 +33,8 @@ function Preview() {
   const { backgroundBlur } = useBackgroundBlur();
   const { title } = useTitle();
   const { subtitle } = useSubtitle();
+  const { fontSize } = useFontSize();
+  const { fontFamily } = useFontFamily();
   const { fontColor } = useFontColor();
   const { hasFontShadow } = useHasFontShadow();
 
@@ -48,6 +52,50 @@ function Preview() {
 
       img.onerror = reject;
     });
+  };
+
+  const fontStyleBuilder = (usage: 'title' | 'subtitle') => {
+    const detailTitleFontSize = () => {
+      if (fontSize === 'Small') {
+        return '24px';
+      }
+
+      if (fontSize === 'Normal') {
+        return '36px';
+      }
+
+      if (fontSize === 'Big') {
+        return '48px';
+      }
+    };
+
+    const detailsubtitleFontSize = () => {
+      if (fontSize === 'Small') {
+        return '14px';
+      }
+
+      if (fontSize === 'Normal') {
+        return '18px';
+      }
+
+      if (fontSize === 'Big') {
+        return '22px';
+      }
+    };
+
+    const detailFontFamily = () => {
+      if (fontFamily === '나눔고딕체') {
+        return 'NanumBarunGothic';
+      }
+
+      if (fontFamily === '도현체') {
+        return 'BMDOHYEON';
+      }
+    };
+
+    return `bold ${
+      usage === 'title' ? detailTitleFontSize() : detailsubtitleFontSize()
+    } ${detailFontFamily()}`;
   };
 
   useEffect(() => {
@@ -89,7 +137,7 @@ function Preview() {
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
       }
 
-      context.font = 'bold 24px NanumBarunGothic';
+      context.font = fontStyleBuilder('title');
       context.textAlign = 'center';
 
       context.shadowColor = 'rgba(0, 0, 0, 0)';
@@ -111,7 +159,7 @@ function Preview() {
       context.fillStyle = `${fontColor}`;
       context.fillText(title, canvas.width / 2, canvas.height / 2);
 
-      context.font = '14px NanumBarunGothic';
+      context.font = fontStyleBuilder('subtitle');
       context.fillText(subtitle, canvas.width / 2, (canvas.height * 5) / 7);
     };
 
@@ -125,6 +173,8 @@ function Preview() {
     backgroundBlur,
     title,
     subtitle,
+    fontSize,
+    fontFamily,
     fontColor,
     hasFontShadow,
   ]);
@@ -143,6 +193,7 @@ function Preview() {
         <p>backgroundBlur: {backgroundBlur.toString()}</p>
         <p>title: {title}</p>
         <p>subtitle: {subtitle}</p>
+        <p>fontSize: {fontSize}</p>
         <p>fontColor: {fontColor}</p>
         <p>hasFontShadow: {hasFontShadow.toString()}</p>
         <p>modalFlag: {modalFlag}</p>

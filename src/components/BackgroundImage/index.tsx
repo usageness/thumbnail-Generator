@@ -8,22 +8,24 @@ import styles from './index.scss';
 function BackgroundImage() {
   const thumbnailData = useContext(ThumbnailContext);
   const modalObject = useContext(ModalContext);
+
   if (!thumbnailData || !modalObject) return <></>;
-  const { modalFlag, setOffModal } = modalObject;
+
   const { useBackgroundType, useBackgroundImageSrc } = thumbnailData;
-  const { isClosing, close } = useClosingState(modalAnimationTime, setOffModal);
+  const { modalFlag, setOffModal } = modalObject;
+  const { close } = useClosingState(modalAnimationTime, setOffModal);
 
   const urlRef = useRef<HTMLInputElement>(null);
 
-  const { backgroundType, setBackgroundType } = useBackgroundType();
-  const { backgroundImageSrc, setBackgroundImageSrc } = useBackgroundImageSrc();
+  const { setBackgroundType } = useBackgroundType();
+  const { setBackgroundImageSrc } = useBackgroundImageSrc();
 
   const changeBackgroundImageSrc = () => {
     if (!urlRef.current) return;
 
     const imageUrl = urlRef.current.value;
 
-    if (!imageUrl.trim) {
+    if (imageUrl.trim.length === 0) {
       alert('이미지 주소를 먼저 입력해주세요.');
       return;
     }
