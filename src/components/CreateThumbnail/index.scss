@@ -1,0 +1,59 @@
+@import '~/styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.debugContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  position: fixed;
+
+  padding: 1rem;
+  box-sizing: border-box;
+
+  color: $WHITE_000;
+  background-color: #888888dd;
+}
+
+.canvasWrapper {
+  display: flex;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  margin: auto;
+}
+
+.canvasRatio {
+  width: 100%;
+}
+
+.canvas {
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+
+  height: 3rem;
+}
+
+.downloadButton {
+  text-decoration: none;
+
+  color: $WHITE_000;
+  background-color: $GRAY_005;
+  box-sizing: border-box;
+
+  padding: 1rem;
+
+  &:hover {
+    background-color: $GRAY_006;
+  }
+}

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef } from 'react';
+import Modal from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
 import { ThumbnailContext } from 'stores/thumbnailContext';
 import styles from './index.scss';
 
-function Preview() {
+function CreateThumbnail() {
   const thumbnailData = useContext(ThumbnailContext);
   const modalObject = useContext(ModalContext);
 
@@ -40,11 +41,13 @@ function Preview() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
+  const downloadRef = useRef<HTMLAnchorElement>(null);
 
   const loadBackgroundImage = () => {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
       img.src = backgroundImageSrc;
+      img.crossOrigin = 'Anonymous';
 
       img.onload = () => {
         resolve(img);
@@ -55,31 +58,32 @@ function Preview() {
   };
 
   const fontStyleBuilder = (usage: 'title' | 'subtitle') => {
+    const fontScale = imageSize === '16:9' ? 3 : imageSize === '4:3' ? 2 : 1;
     const detailTitleFontSize = () => {
       if (fontSize === 'Small') {
-        return '24px';
+        return `${24 * fontScale}px`;
       }
 
       if (fontSize === 'Normal') {
-        return '36px';
+        return `${36 * fontScale}px`;
       }
 
       if (fontSize === 'Big') {
-        return '48px';
+        return `${48 * fontScale}px`;
       }
     };
 
     const detailsubtitleFontSize = () => {
       if (fontSize === 'Small') {
-        return '14px';
+        return `${14 * fontScale}px`;
       }
 
       if (fontSize === 'Normal') {
-        return '18px';
+        return `${18 * fontScale}px`;
       }
 
       if (fontSize === 'Big') {
-        return '22px';
+        return `${22 * fontScale}px`;
       }
     };
 
@@ -102,14 +106,13 @@ function Preview() {
     const asyncWrapper = async () => {
       const canvas = canvasRef.current;
       const canvasContainer = canvasWrapperRef.current;
+      const downloadButton = downloadRef.current;
 
-      if (!canvas || !canvasContainer) return;
+      if (!canvas || !canvasContainer || !downloadButton) return;
 
       const context = canvas.getContext('2d');
 
       if (!context) return;
-
-      canvasContainer.style.aspectRatio = imageSize.replace(':', '/');
 
       if (backgroundType === 'Color') {
         context.fillStyle = backgroundColor;
@@ -160,71 +163,52 @@ function Preview() {
 
       context.font = fontStyleBuilder('subtitle');
       context.fillText(subtitle, canvas.width / 2, (canvas.height * 5) / 7);
+
+      downloadButton.download = 'Thumbnail.png';
+      downloadButton.href = canvas.toDataURL('image/png');
     };
 
     asyncWrapper();
-  }, [
-    imageSize,
-    backgroundType,
-    backgroundImageSrc,
-    backgroundColor,
-    backgroundGradint,
-    backgroundBlur,
-    title,
-    subtitle,
-    fontSize,
-    fontFamily,
-    fontColor,
-    hasFontShadow,
-  ]);
+  }, [modalFlag]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.debugContainer}>
-        <p>-- DUBUG --</p>
-        <p>imageSize: {imageSize}</p>
-        <p>backgroundType: {backgroundType}</p>
-        <p>backgroundImageSrc: {backgroundImageSrc}</p>
-        <p>backgroundColor: {backgroundColor}</p>
-        <p>
-          backgroundGradint: {backgroundGradint.start} / {backgroundGradint.end}
-        </p>
-        <p>backgroundBlur: {backgroundBlur.toString()}</p>
-        <p>title: {title}</p>
-        <p>subtitle: {subtitle}</p>
-        <p>fontSize: {fontSize}</p>
-        <p>fontColor: {fontColor}</p>
-        <p>hasFontShadow: {hasFontShadow.toString()}</p>
-        <p>modalFlag: {modalFlag}</p>
-      </div>
-      <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
-        <div className={styles.canvasRatio}>
-          {imageSize === '16:9' ? (
-            <canvas
-              className={styles.canvas}
-              width="640"
-              height="360"
-              ref={canvasRef}
-            />
-          ) : imageSize === '4:3' ? (
-            <canvas
-              className={styles.canvas}
-              width="600"
-              height="450"
-              ref={canvasRef}
-            />
-          ) : (
-            <canvas
-              className={styles.canvas}
-              width="600"
-              height="600"
-              ref={canvasRef}
-            />
-          )}
+    <Modal modalState={modalFlag === 'createThumbnail'}>
+      <div className={styles.container}>
+        <h3>썸네일이 생성되었습니다</h3>
+        <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
+          <div className={styles.canvasRatio}>
+            {imageSize === '16:9' ? (
+              <canvas
+                className={styles.canvas}
+                width="1920"
+                height="1280"
+                ref={canvasRef}
+              />
+            ) : imageSize === '4:3' ? (
+              <canvas
+                className={styles.canvas}
+                width="1024"
+                height="720"
+                ref={canvasRef}
+              />
+            ) : (
+              <canvas
+                className={styles.canvas}
+                width="600"
+                height="600"
+                ref={canvasRef}
+              />
+            )}
+          </div>
+        </div>
+        <div className={styles.buttonContainer}>
+          <a className={styles.downloadButton} ref={downloadRef} href="">
+            다운로드
+          </a>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
-export default Preview;
+export default CreateThumbnail;

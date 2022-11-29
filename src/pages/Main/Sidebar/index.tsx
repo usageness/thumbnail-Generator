@@ -22,7 +22,11 @@ function Sidebar() {
     useFontColor,
     useHasFontShadow,
   } = thumbnailData;
-  const { showBackgroundColorModal, showBackgroundImageModal } = modalObject;
+  const {
+    showBackgroundColorModal,
+    showBackgroundImageModal,
+    showCreateThumbnailModal,
+  } = modalObject;
 
   const { imageSize, setImageSize } = useImageSize();
   const { backgroundBlur, setBackgroundBlur } = useBackgroundBlur();
@@ -203,7 +207,7 @@ function Sidebar() {
         </button>
         <button
           className={styles.submitButton}
-          onClick={() => alert('준비중입니다')}
+          onClick={showCreateThumbnailModal}
         >
           썸네일 생성
         </button>

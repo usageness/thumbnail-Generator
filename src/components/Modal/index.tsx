@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import Portal from 'components/Portal';
 import useClosingState from 'hooks/useClosingState';
-import styles from './index.scss';
+import Portal from 'components/Portal';
 import { ModalContext } from 'stores/modalContext';
+
+import styles from './index.scss';
 
 interface ModalProps {
   modalState: boolean;

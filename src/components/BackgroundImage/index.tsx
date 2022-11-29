@@ -25,7 +25,7 @@ function BackgroundImage() {
 
     const imageUrl = urlRef.current.value;
 
-    if (imageUrl.trim.length === 0) {
+    if (imageUrl.trim().length === 0) {
       alert('이미지 주소를 먼저 입력해주세요.');
       return;
     }
