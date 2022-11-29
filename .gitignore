@@ -9,6 +9,7 @@
 
 # Plug N Play 를 위해 ignore 하지 않습니다.
 #.pnp.*
+node_modules
 
 # ide files
 .vscode
