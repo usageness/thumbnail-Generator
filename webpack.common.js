@@ -41,6 +41,7 @@ module.exports = {
       hooks: path.resolve(__dirname, './src/hooks'),
       stores: path.resolve(__dirname, './src/stores'),
       components: path.resolve(__dirname, './src/components'),
+      constant: path.resolve(__dirname, './src/constant'),
     },
   },
   output: {

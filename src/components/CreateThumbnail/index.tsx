@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import Modal from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
 import { ThumbnailContext } from 'stores/thumbnailContext';
+import { corsPrefixUrl } from 'constant/constant';
 import styles from './index.scss';
 
 function CreateThumbnail() {
@@ -46,7 +47,7 @@ function CreateThumbnail() {
   const loadBackgroundImage = () => {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
-      img.src = backgroundImageSrc;
+      img.src = `${corsPrefixUrl}${backgroundImageSrc}`;
       img.crossOrigin = 'Anonymous';
 
       img.onload = () => {
