@@ -1,24 +1,21 @@
-import Modal, { modalAnimationTime } from 'components/Modal';
-import useClosingState from 'hooks/useClosingState';
 import { useContext, useRef } from 'react';
+import useClosingState from 'hooks/useClosingState';
+import useThumbnailData from 'hooks/useThumbnailData';
+import Modal, { modalAnimationTime } from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
-import { ThumbnailContext } from 'stores/thumbnailContext';
 import styles from './index.scss';
 
 function BackgroundImage() {
-  const thumbnailData = useContext(ThumbnailContext);
+  const { isLoading, setBackgroundType, setBackgroundImageSrc } =
+    useThumbnailData();
   const modalObject = useContext(ModalContext);
 
-  if (!thumbnailData || !modalObject) return <></>;
+  if (isLoading || !modalObject) return <></>;
 
-  const { useBackgroundType, useBackgroundImageSrc } = thumbnailData;
   const { modalFlag, setOffModal } = modalObject;
   const { close } = useClosingState(modalAnimationTime, setOffModal);
 
   const urlRef = useRef<HTMLInputElement>(null);
-
-  const { setBackgroundType } = useBackgroundType();
-  const { setBackgroundImageSrc } = useBackgroundImageSrc();
 
   const changeBackgroundImageSrc = () => {
     if (!urlRef.current) return;

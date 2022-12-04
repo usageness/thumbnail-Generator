@@ -1,40 +1,26 @@
-import { useContext, useEffect, useRef } from 'react';
-import { ThumbnailContext } from 'stores/thumbnailContext';
+import useThumbnailData from 'hooks/useThumbnailData';
+import { useEffect, useRef } from 'react';
 import Debug from './Debug';
 import styles from './index.scss';
 
 function Preview() {
-  const thumbnailData = useContext(ThumbnailContext);
-
-  if (!thumbnailData) return <></>;
-
   const {
-    useImageSize,
-    useBackgroundType,
-    useBackgroundImageSrc,
-    useBackgroundColor,
-    useBackgroundGradint,
-    useBackgroundBlur,
-    useTitle,
-    useSubtitle,
-    useFontSize,
-    useFontFamily,
-    useFontColor,
-    useHasFontShadow,
-  } = thumbnailData;
+    isLoading,
+    imageSize,
+    backgroundType,
+    backgroundImageSrc,
+    backgroundColor,
+    backgroundGradint,
+    backgroundBlur,
+    title,
+    subtitle,
+    fontSize,
+    fontFamily,
+    fontColor,
+    hasFontShadow,
+  } = useThumbnailData();
 
-  const { imageSize } = useImageSize();
-  const { backgroundType } = useBackgroundType();
-  const { backgroundImageSrc } = useBackgroundImageSrc();
-  const { backgroundColor } = useBackgroundColor();
-  const { backgroundGradint } = useBackgroundGradint();
-  const { backgroundBlur } = useBackgroundBlur();
-  const { title } = useTitle();
-  const { subtitle } = useSubtitle();
-  const { fontSize } = useFontSize();
-  const { fontFamily } = useFontFamily();
-  const { fontColor } = useFontColor();
-  const { hasFontShadow } = useHasFontShadow();
+  if (isLoading) return <></>;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);

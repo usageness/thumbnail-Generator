@@ -1,44 +1,31 @@
 import { useContext, useEffect, useRef } from 'react';
+import useThumbnailData from 'hooks/useThumbnailData';
 import Modal from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
-import { ThumbnailContext } from 'stores/thumbnailContext';
 import { corsPrefixUrl } from 'constant/constant';
 import styles from './index.scss';
 
 function CreateThumbnail() {
-  const thumbnailData = useContext(ThumbnailContext);
+  const {
+    isLoading,
+    imageSize,
+    backgroundType,
+    backgroundImageSrc,
+    backgroundColor,
+    backgroundGradint,
+    backgroundBlur,
+    title,
+    subtitle,
+    fontSize,
+    fontFamily,
+    fontColor,
+    hasFontShadow,
+  } = useThumbnailData();
   const modalObject = useContext(ModalContext);
 
-  if (!thumbnailData || !modalObject) return <></>;
+  if (isLoading || !modalObject) return <></>;
 
-  const {
-    useImageSize,
-    useBackgroundType,
-    useBackgroundImageSrc,
-    useBackgroundColor,
-    useBackgroundGradint,
-    useBackgroundBlur,
-    useTitle,
-    useSubtitle,
-    useFontSize,
-    useFontFamily,
-    useFontColor,
-    useHasFontShadow,
-  } = thumbnailData;
   const { modalFlag } = modalObject;
-
-  const { imageSize } = useImageSize();
-  const { backgroundType } = useBackgroundType();
-  const { backgroundImageSrc } = useBackgroundImageSrc();
-  const { backgroundColor } = useBackgroundColor();
-  const { backgroundGradint } = useBackgroundGradint();
-  const { backgroundBlur } = useBackgroundBlur();
-  const { title } = useTitle();
-  const { subtitle } = useSubtitle();
-  const { fontSize } = useFontSize();
-  const { fontFamily } = useFontFamily();
-  const { fontColor } = useFontColor();
-  const { hasFontShadow } = useHasFontShadow();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);

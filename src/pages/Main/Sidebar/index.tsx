@@ -1,41 +1,36 @@
+import { useContext } from 'react';
+import useThumbnailData from 'hooks/useThumbnailData';
+import { ModalContext } from 'stores/modalContext';
+
 import Image from 'assets/image.svg';
 import Palette from 'assets/palette.svg';
 import ThumbnailData from 'types/thumbnail';
-import { useContext } from 'react';
-import { ThumbnailContext } from 'stores/thumbnailContext';
-import { ModalContext } from 'stores/modalContext';
 import styles from './index.scss';
 
 function Sidebar() {
-  const thumbnailData = useContext(ThumbnailContext);
+  const {
+    isLoading,
+    imageSize,
+    setImageSize,
+    backgroundBlur,
+    setBackgroundBlur,
+    setTitle,
+    setSubtitle,
+    setFontSize,
+    setFontFamily,
+    setFontColor,
+    hasFontShadow,
+    setHasFontShadow,
+  } = useThumbnailData();
   const modalObject = useContext(ModalContext);
 
-  if (!thumbnailData || !modalObject) return <></>;
+  if (isLoading || !modalObject) return <></>;
 
-  const {
-    useImageSize,
-    useBackgroundBlur,
-    useTitle,
-    useSubtitle,
-    useFontSize,
-    useFontFamily,
-    useFontColor,
-    useHasFontShadow,
-  } = thumbnailData;
   const {
     showBackgroundColorModal,
     showBackgroundImageModal,
     showCreateThumbnailModal,
   } = modalObject;
-
-  const { imageSize, setImageSize } = useImageSize();
-  const { backgroundBlur, setBackgroundBlur } = useBackgroundBlur();
-  const { setTitle } = useTitle();
-  const { setSubtitle } = useSubtitle();
-  const { setFontSize } = useFontSize();
-  const { setFontFamily } = useFontFamily();
-  const { setFontColor } = useFontColor();
-  const { hasFontShadow, setHasFontShadow } = useHasFontShadow();
 
   const changeImageSize = (newSize: ThumbnailData['imageSize']) => {
     setImageSize(newSize);

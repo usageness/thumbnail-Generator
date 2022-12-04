@@ -1,23 +1,27 @@
-import Modal from 'components/Modal';
 import { useContext } from 'react';
+import useThumbnailData from 'hooks/useThumbnailData';
+import Modal from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
-import { ThumbnailContext } from 'stores/thumbnailContext';
-import ThumbnailData from 'types/thumbnail';
 import GredientBackground from './GredientBackground';
 import SingleColorBackground from './SingleColorBackground';
+import ThumbnailData from 'types/thumbnail';
 import styles from './index.scss';
 
 function BackgroundColor() {
-  const thumbnailData = useContext(ThumbnailContext);
+  const {
+    isLoading,
+    backgroundType,
+    setBackgroundType,
+    backgroundColor,
+    setBackgroundColor,
+    backgroundGradint,
+    setBackgroundGradint,
+  } = useThumbnailData();
   const modalObject = useContext(ModalContext);
-  if (!thumbnailData || !modalObject) return <></>;
-  const { modalFlag } = modalObject;
-  const { useBackgroundType, useBackgroundColor, useBackgroundGradint } =
-    thumbnailData;
 
-  const { backgroundType, setBackgroundType } = useBackgroundType();
-  const { backgroundColor, setBackgroundColor } = useBackgroundColor();
-  const { backgroundGradint, setBackgroundGradint } = useBackgroundGradint();
+  if (isLoading || !modalObject) return <></>;
+
+  const { modalFlag } = modalObject;
 
   const changeBackgroundType = (newType: ThumbnailData['backgroundType']) => {
     setBackgroundType(newType);
