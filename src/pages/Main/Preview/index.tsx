@@ -1,13 +1,12 @@
 import { useContext, useEffect, useRef } from 'react';
-import { ModalContext } from 'stores/modalContext';
 import { ThumbnailContext } from 'stores/thumbnailContext';
+import Debug from './Debug';
 import styles from './index.scss';
 
 function Preview() {
   const thumbnailData = useContext(ThumbnailContext);
-  const modalObject = useContext(ModalContext);
 
-  if (!thumbnailData || !modalObject) return <></>;
+  if (!thumbnailData) return <></>;
 
   const {
     useImageSize,
@@ -23,7 +22,6 @@ function Preview() {
     useFontColor,
     useHasFontShadow,
   } = thumbnailData;
-  const { modalFlag } = modalObject;
 
   const { imageSize } = useImageSize();
   const { backgroundType } = useBackgroundType();
@@ -180,23 +178,7 @@ function Preview() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.debugContainer}>
-        <p>-- DUBUG --</p>
-        <p>imageSize: {imageSize}</p>
-        <p>backgroundType: {backgroundType}</p>
-        <p>backgroundImageSrc: {backgroundImageSrc}</p>
-        <p>backgroundColor: {backgroundColor}</p>
-        <p>
-          backgroundGradint: {backgroundGradint.start} / {backgroundGradint.end}
-        </p>
-        <p>backgroundBlur: {backgroundBlur.toString()}</p>
-        <p>title: {title}</p>
-        <p>subtitle: {subtitle}</p>
-        <p>fontSize: {fontSize}</p>
-        <p>fontColor: {fontColor}</p>
-        <p>hasFontShadow: {hasFontShadow.toString()}</p>
-        <p>modalFlag: {modalFlag}</p>
-      </div>
+      <Debug />
       <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
         <div className={styles.canvasRatio}>
           {imageSize === '16:9' ? (
