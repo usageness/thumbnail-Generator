@@ -1,1 +1,1 @@
-export const corsPrefixUrl = 'http://host.teamcrazyperformance.com:7610/';
+export const corsPrefixUrl = 'https://host.teamcrazyperformance.com/';
