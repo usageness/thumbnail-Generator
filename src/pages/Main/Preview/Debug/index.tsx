@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import useThumbnailData from 'hooks/useThumbnailData';
 import { ModalContext } from 'stores/modalContext';
-import styles from '../index.scss';
+import styles from './index.scss';
 
 function Debug() {
   const {

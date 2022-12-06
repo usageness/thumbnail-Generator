@@ -1,0 +1,15 @@
+@import '~/styles/variables';
+
+.debugContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  position: fixed;
+
+  padding: 1rem;
+  box-sizing: border-box;
+
+  color: $WHITE_000;
+  background-color: $GRAY_ALPHA_000;
+}
