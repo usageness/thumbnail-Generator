@@ -83,6 +83,10 @@ function CreateThumbnail() {
       if (fontFamily === '도현체') {
         return 'BMDOHYEON';
       }
+
+      if (fontFamily === '원스토어모바일POP체') {
+        return 'ONE-Mobile-POP';
+      }
     };
 
     return `bold ${

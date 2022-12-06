@@ -6,7 +6,7 @@
 
 ## 사용법
 
-![image](https://user-images.githubusercontent.com/28296575/204489959-e6283b44-fccd-462a-ae8f-3c110c73abf3.png)
+![image](https://user-images.githubusercontent.com/28296575/205991964-66e175d9-e6fa-4d29-80bb-1d776bebe178.png)
 
 ### 파일 사이즈 선택
 
@@ -38,6 +38,7 @@
 - 폰트 스타일 : 폰트를 설정합니다. 현재 아래 두 가지 폰트를 적용할 수 있습니다.
   - 나눔고딕체
   - 배민도현체
+  - 원스토어모바일POP체
 - 글자 색 : 텍스트의 색상을 설정합니다.
 - 그림자 효과 : 텍스트에 그림자 효과를 적용합니다.
 

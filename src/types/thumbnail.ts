@@ -8,7 +8,7 @@ interface ThumbnailData {
   title: string;
   subtitle: string;
   fontSize: 'Small' | 'Normal' | 'Big';
-  fontFamily: '나눔고딕체' | '도현체';
+  fontFamily: '나눔고딕체' | '도현체' | '원스토어모바일POP체';
   fontColor: string;
   hasFontShadow: boolean;
 }

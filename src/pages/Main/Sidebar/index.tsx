@@ -173,6 +173,7 @@ function Sidebar() {
         <select name="font_family" onChange={changeFontFamily}>
           <option value="나눔고딕체">나눔고딕체</option>
           <option value="도현체">도현체</option>
+          <option value="원스토어모바일POP체">원스토어모바일POP체</option>
         </select>
       </div>
       <div className={styles.singleInputContainer}>
