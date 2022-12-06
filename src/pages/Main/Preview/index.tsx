@@ -1,5 +1,6 @@
 import useThumbnailData from 'hooks/useThumbnailData';
 import { useEffect, useRef } from 'react';
+import OptionTab from './OptionTab';
 import Debug from './Debug';
 import styles from './index.scss';
 
@@ -74,6 +75,10 @@ function Preview() {
 
       if (fontFamily === '도현체') {
         return 'BMDOHYEON';
+      }
+
+      if (fontFamily === '원스토어모바일POP체') {
+        return 'ONE-Mobile-POP';
       }
     };
 
@@ -164,6 +169,7 @@ function Preview() {
 
   return (
     <div className={styles.container}>
+      <OptionTab />
       <Debug />
       <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
         <div className={styles.canvasRatio}>

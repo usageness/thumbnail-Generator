@@ -1,0 +1,40 @@
+@import '~/styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.description {
+  line-height: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.closeButton {
+  width: 100%;
+  height: 2rem;
+}
+
+.linkButton {
+  background: none;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &:hover {
+    background: none;
+
+    img {
+      fill: $WHITE_000;
+    }
+  }
+}

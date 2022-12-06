@@ -1,11 +1,17 @@
 import { useState } from 'react';
 
 export interface UseModalReturnType {
-  modalFlag: 'off' | 'backgroundColor' | 'backgroundImage' | 'createThumbnail';
+  modalFlag:
+    | 'off'
+    | 'backgroundColor'
+    | 'backgroundImage'
+    | 'createThumbnail'
+    | 'information';
   setOffModal: () => void;
   showBackgroundColorModal: () => void;
   showBackgroundImageModal: () => void;
   showCreateThumbnailModal: () => void;
+  showInformationModal: () => void;
 }
 
 const useModal = (): UseModalReturnType => {
@@ -28,12 +34,17 @@ const useModal = (): UseModalReturnType => {
     setModalFlag('createThumbnail');
   };
 
+  const showInformationModal = (): void => {
+    setModalFlag('information');
+  };
+
   return {
     modalFlag,
     setOffModal,
     showBackgroundColorModal,
     showBackgroundImageModal,
     showCreateThumbnailModal,
+    showInformationModal,
   };
 };
 

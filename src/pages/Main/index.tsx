@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import BackgroundColor from 'components/BackgroundColor';
 import BackgroundImage from 'components/BackgroundImage';
 import CreateThumbnail from 'components/CreateThumbnail';
+import Information from 'components/Information';
 import { ThumbnailContext } from 'stores/thumbnailContext';
 import { ModalContext } from 'stores/modalContext';
 import styles from './index.scss';
@@ -19,6 +20,7 @@ function Main() {
           <BackgroundColor />
           <BackgroundImage />
           <CreateThumbnail />
+          <Information />
         </ThumbnailContext.Provider>
       </ModalContext.Provider>
     </div>

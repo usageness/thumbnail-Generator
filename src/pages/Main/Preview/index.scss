@@ -3,21 +3,9 @@
 .container {
   display: flex;
 
-  width: 75%;
-}
+  width: 80%;
 
-.debugContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  position: fixed;
-
-  padding: 1rem;
-  box-sizing: border-box;
-
-  color: $WHITE_000;
-  background-color: #888888dd;
+  background-color: $GRAY_ALPHA_000;
 }
 
 .canvasWrapper {
@@ -27,7 +15,7 @@
   width: 60%;
   height: auto;
 
-  border: 2px dotted $RED_001;
+  box-shadow: 5px 5px 5px $BLACK_ALPHA_000;
   box-sizing: border-box;
 
   margin: auto;
