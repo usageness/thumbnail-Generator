@@ -1,4 +1,5 @@
 import useThumbnail from 'hooks/useThumbnail';
+import useAppState from 'hooks/useAppState';
 import useModal from 'hooks/useModal';
 import Preview from './Preview';
 import Sidebar from './Sidebar';
@@ -6,8 +7,10 @@ import BackgroundColor from 'components/BackgroundColor';
 import BackgroundImage from 'components/BackgroundImage';
 import CreateThumbnail from 'components/CreateThumbnail';
 import Information from 'components/Information';
+import OptionModal from 'components/OptionModal';
 import { ThumbnailContext } from 'stores/thumbnailContext';
 import { ModalContext } from 'stores/modalContext';
+import { AppStateContext } from 'stores/appStateContext';
 import styles from './index.scss';
 
 function Main() {
@@ -15,12 +18,15 @@ function Main() {
     <div className={styles.container}>
       <ModalContext.Provider value={useModal()}>
         <ThumbnailContext.Provider value={useThumbnail()}>
-          <Sidebar />
-          <Preview />
-          <BackgroundColor />
-          <BackgroundImage />
-          <CreateThumbnail />
-          <Information />
+          <AppStateContext.Provider value={useAppState()}>
+            <Sidebar />
+            <Preview />
+            <BackgroundColor />
+            <BackgroundImage />
+            <CreateThumbnail />
+            <Information />
+            <OptionModal />
+          </AppStateContext.Provider>
         </ThumbnailContext.Provider>
       </ModalContext.Provider>
     </div>
