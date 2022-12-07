@@ -6,12 +6,14 @@ export interface UseModalReturnType {
     | 'backgroundColor'
     | 'backgroundImage'
     | 'createThumbnail'
-    | 'information';
+    | 'information'
+    | 'option';
   setOffModal: () => void;
   showBackgroundColorModal: () => void;
   showBackgroundImageModal: () => void;
   showCreateThumbnailModal: () => void;
   showInformationModal: () => void;
+  showOptionModal: () => void;
 }
 
 const useModal = (): UseModalReturnType => {
@@ -38,6 +40,10 @@ const useModal = (): UseModalReturnType => {
     setModalFlag('information');
   };
 
+  const showOptionModal = (): void => {
+    setModalFlag('option');
+  };
+
   return {
     modalFlag,
     setOffModal,
@@ -45,6 +51,7 @@ const useModal = (): UseModalReturnType => {
     showBackgroundImageModal,
     showCreateThumbnailModal,
     showInformationModal,
+    showOptionModal,
   };
 };
 
