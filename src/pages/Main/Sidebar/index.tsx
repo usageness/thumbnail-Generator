@@ -21,6 +21,8 @@ function Sidebar() {
     setFontColor,
     hasFontShadow,
     setHasFontShadow,
+    saveCurrentConfiguration,
+    loadLatestConfiguration,
   } = useThumbnailData();
   const modalObject = useContext(ModalContext);
 
@@ -68,6 +70,11 @@ function Sidebar() {
 
   const changeHasFontShadow = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasFontShadow(prev => !prev);
+  };
+
+  const generateThumbnail = () => {
+    saveCurrentConfiguration();
+    showCreateThumbnailModal();
   };
 
   return (
@@ -198,13 +205,8 @@ function Sidebar() {
         />
       </div>
       <div className={styles.submitButtonContainer}>
-        <button onClick={() => alert('준비중입니다')}>
-          최근 설정 불러오기
-        </button>
-        <button
-          className={styles.submitButton}
-          onClick={showCreateThumbnailModal}
-        >
+        <button onClick={loadLatestConfiguration}>최근 설정 불러오기</button>
+        <button className={styles.submitButton} onClick={generateThumbnail}>
           썸네일 생성
         </button>
       </div>

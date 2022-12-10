@@ -1,3 +1,4 @@
+import { localStorageKey } from 'constant/constant';
 import { useContext } from 'react';
 import { ThumbnailContext } from 'stores/thumbnailContext';
 import ThumbnailData from 'types/thumbnail';
@@ -28,6 +29,8 @@ interface useThumbnailDataPendingReturnValues {
   setFontColor: undefined;
   hasFontShadow: undefined;
   setHasFontShadow: undefined;
+  saveCurrentConfiguration: undefined;
+  loadLatestConfiguration: undefined;
 }
 
 interface useThumbnailDataFulfilledReturnValues {
@@ -74,6 +77,8 @@ interface useThumbnailDataFulfilledReturnValues {
   setHasFontShadow: React.Dispatch<
     React.SetStateAction<ThumbnailData['hasFontShadow']>
   >;
+  saveCurrentConfiguration: () => void;
+  loadLatestConfiguration: () => void;
 }
 
 const useThumbnailData = ():
@@ -108,6 +113,8 @@ const useThumbnailData = ():
       setFontFamily: undefined,
       setFontColor: undefined,
       setHasFontShadow: undefined,
+      saveCurrentConfiguration: undefined,
+      loadLatestConfiguration: undefined,
     };
 
   const {
@@ -138,6 +145,54 @@ const useThumbnailData = ():
   const { fontColor, setFontColor } = useFontColor();
   const { hasFontShadow, setHasFontShadow } = useHasFontShadow();
 
+  const saveCurrentConfiguration = () => {
+    localStorage.setItem(
+      localStorageKey.latestConfiguration,
+      JSON.stringify({
+        imageSize,
+        backgroundType,
+        backgroundImageSrc,
+        backgroundColor,
+        backgroundGradint,
+        backgroundBlur,
+        title,
+        subtitle,
+        fontSize,
+        fontFamily,
+        fontColor,
+        hasFontShadow,
+      }),
+    );
+  };
+
+  const loadLatestConfiguration = () => {
+    const latestRawData = localStorage.getItem(
+      localStorageKey.latestConfiguration,
+    );
+
+    if (!latestRawData) {
+      alert('저장된 데이터가 없습니다.');
+      return;
+    }
+
+    const data = JSON.parse(latestRawData);
+
+    setImageSize(data.imageSize);
+    setBackgroundType(data.backgroundType);
+    setBackgroundImageSrc(data.backgroundImageSrc);
+    setBackgroundColor(data.backgroundColor);
+    setBackgroundGradint(data.backgroundGradint);
+    setBackgroundBlur(data.backgroundBlur);
+    setTitle(data.title);
+    setSubtitle(data.subtitle);
+    setFontSize(data.fontSize);
+    setFontFamily(data.fontFamily);
+    setFontColor(data.fontColor);
+    setHasFontShadow(data.hasFontShadow);
+
+    alert('데이터를 성공적으로 불러왔습니다.');
+  };
+
   return {
     isLoading: false,
     imageSize,
@@ -164,6 +219,8 @@ const useThumbnailData = ():
     setFontFamily,
     setFontColor,
     setHasFontShadow,
+    saveCurrentConfiguration,
+    loadLatestConfiguration,
   };
 };
 
