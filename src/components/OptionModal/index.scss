@@ -1,18 +1,37 @@
-.singleInputContainer {
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+
+  margin: 1rem 0;
+}
+
+.singleLineContainer {
   display: flex;
   justify-content: space-between;
 
   width: 100%;
 
-  margin: 2rem 0;
-
-  label {
+  label,
+  p {
     display: flex;
     align-items: center;
+
+    height: 1.5rem;
   }
 
   input {
     width: 1.5rem;
+    height: 1.5rem;
+
+    margin: 0;
+  }
+
+  button {
     height: 1.5rem;
   }
 }
