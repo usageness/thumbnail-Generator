@@ -38,7 +38,7 @@ function Sidebar() {
     setImageSize(newSize);
   };
 
-  const changeBackgroundBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeBackgroundBlur = () => {
     setBackgroundBlur(prev => !prev);
   };
 
@@ -99,7 +99,7 @@ function Sidebar() {
             }`}
             onClick={() => changeImageSize('4:3')}
           >
-            1024 X 720
+            1024 X 768
           </button>
           <p>4 : 3</p>
         </div>
