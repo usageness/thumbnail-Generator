@@ -1,201 +1,25 @@
+import { useRef } from 'react';
 import useThumbnailData from 'hooks/useThumbnailData';
-import { useEffect, useRef } from 'react';
 import OptionTab from './OptionTab';
 import Debug from './Debug';
+import Paint from 'components/Paint';
+
 import styles from './index.scss';
 
 function Preview() {
-  const {
-    isLoading,
-    imageSize,
-    backgroundType,
-    backgroundImageSrc,
-    backgroundColor,
-    backgroundGradint,
-    backgroundBlur,
-    title,
-    subtitle,
-    fontSize,
-    fontFamily,
-    fontColor,
-    hasFontShadow,
-  } = useThumbnailData();
+  const { isLoading } = useThumbnailData();
 
   if (isLoading) return <></>;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
 
-  const loadBackgroundImage = () => {
-    return new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      img.src = backgroundImageSrc;
-
-      img.onload = () => {
-        resolve(img);
-      };
-
-      img.onerror = reject;
-    });
-  };
-
-  const fontStyleBuilder = (usage: 'title' | 'subtitle') => {
-    const detailTitleFontSize = () => {
-      if (fontSize === 'Small') {
-        return '24px';
-      }
-
-      if (fontSize === 'Normal') {
-        return '36px';
-      }
-
-      if (fontSize === 'Big') {
-        return '48px';
-      }
-    };
-
-    const detailsubtitleFontSize = () => {
-      if (fontSize === 'Small') {
-        return '14px';
-      }
-
-      if (fontSize === 'Normal') {
-        return '18px';
-      }
-
-      if (fontSize === 'Big') {
-        return '22px';
-      }
-    };
-
-    const detailFontFamily = () => {
-      if (fontFamily === '나눔고딕체') {
-        return 'NanumBarunGothic';
-      }
-
-      if (fontFamily === '도현체') {
-        return 'BMDOHYEON';
-      }
-
-      if (fontFamily === '원스토어모바일POP체') {
-        return 'ONE-Mobile-POP';
-      }
-    };
-
-    return `bold ${
-      usage === 'title' ? detailTitleFontSize() : detailsubtitleFontSize()
-    } ${detailFontFamily()}`;
-  };
-
-  useEffect(() => {
-    const asyncWrapper = async () => {
-      const canvas = canvasRef.current;
-      const canvasContainer = canvasWrapperRef.current;
-
-      if (!canvas || !canvasContainer) return;
-
-      const context = canvas.getContext('2d');
-
-      if (!context) return;
-
-      canvasContainer.style.aspectRatio = imageSize.replace(':', '/');
-
-      if (backgroundType === 'Color') {
-        context.fillStyle = backgroundColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (backgroundType === 'Gradient') {
-        const gradient = context.createLinearGradient(
-          0,
-          0,
-          canvas.width,
-          canvas.height,
-        );
-        gradient.addColorStop(0, backgroundGradint.start);
-        gradient.addColorStop(1, backgroundGradint.end);
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (backgroundType === 'Image') {
-        const img = await loadBackgroundImage();
-
-        context.fillStyle = backgroundColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
-      }
-
-      context.font = fontStyleBuilder('title');
-      context.textAlign = 'center';
-
-      context.shadowColor = 'rgba(0, 0, 0, 0)';
-      context.shadowOffsetX = 0;
-      context.shadowOffsetY = 0;
-
-      if (backgroundBlur) {
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (hasFontShadow) {
-        context.shadowColor = 'black';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
-      }
-
-      context.fillStyle = `${fontColor}`;
-      context.fillText(title, canvas.width / 2, canvas.height / 2);
-
-      context.font = fontStyleBuilder('subtitle');
-      context.fillText(subtitle, canvas.width / 2, (canvas.height * 5) / 7);
-    };
-
-    asyncWrapper();
-  }, [
-    imageSize,
-    backgroundType,
-    backgroundImageSrc,
-    backgroundColor,
-    backgroundGradint,
-    backgroundBlur,
-    title,
-    subtitle,
-    fontSize,
-    fontFamily,
-    fontColor,
-    hasFontShadow,
-  ]);
-
   return (
     <div className={styles.container}>
       <OptionTab />
       <Debug />
       <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
-        <div className={styles.canvasRatio}>
-          {imageSize === '16:9' ? (
-            <canvas
-              className={styles.canvas}
-              width="640"
-              height="360"
-              ref={canvasRef}
-            />
-          ) : imageSize === '4:3' ? (
-            <canvas
-              className={styles.canvas}
-              width="600"
-              height="450"
-              ref={canvasRef}
-            />
-          ) : (
-            <canvas
-              className={styles.canvas}
-              width="600"
-              height="600"
-              ref={canvasRef}
-            />
-          )}
-        </div>
+        <Paint ref={canvasRef} />
       </div>
     </div>
   );

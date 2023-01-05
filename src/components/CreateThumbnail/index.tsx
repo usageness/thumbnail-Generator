@@ -1,29 +1,15 @@
-import { useContext, useEffect, useRef } from 'react';
-import useThumbnailData from 'hooks/useThumbnailData';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'components/Modal';
 import { ModalContext } from 'stores/modalContext';
-import { corsPrefixUrl } from 'constant/constant';
 import styles from './index.scss';
+import Paint from 'components/Paint';
 
 function CreateThumbnail() {
-  const {
-    isLoading,
-    imageSize,
-    backgroundType,
-    backgroundImageSrc,
-    backgroundColor,
-    backgroundGradint,
-    backgroundBlur,
-    title,
-    subtitle,
-    fontSize,
-    fontFamily,
-    fontColor,
-    hasFontShadow,
-  } = useThumbnailData();
+  const [isDownloadReady, setIsDownloadReady] = useState(false);
+
   const modalObject = useContext(ModalContext);
 
-  if (isLoading || !modalObject) return <></>;
+  if (!modalObject) return <></>;
 
   const { modalFlag } = modalObject;
 
@@ -31,137 +17,23 @@ function CreateThumbnail() {
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
   const downloadRef = useRef<HTMLAnchorElement>(null);
 
-  const loadBackgroundImage = () => {
-    return new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      img.src = `${corsPrefixUrl}${backgroundImageSrc}`;
-      img.crossOrigin = 'Anonymous';
-
-      img.onload = () => {
-        resolve(img);
-      };
-
-      img.onerror = reject;
-    });
-  };
-
-  const fontStyleBuilder = (usage: 'title' | 'subtitle') => {
-    const fontScale = imageSize === '16:9' ? 3 : imageSize === '4:3' ? 2 : 1;
-    const detailTitleFontSize = () => {
-      if (fontSize === 'Small') {
-        return `${24 * fontScale}px`;
-      }
-
-      if (fontSize === 'Normal') {
-        return `${36 * fontScale}px`;
-      }
-
-      if (fontSize === 'Big') {
-        return `${48 * fontScale}px`;
-      }
-    };
-
-    const detailsubtitleFontSize = () => {
-      if (fontSize === 'Small') {
-        return `${14 * fontScale}px`;
-      }
-
-      if (fontSize === 'Normal') {
-        return `${18 * fontScale}px`;
-      }
-
-      if (fontSize === 'Big') {
-        return `${22 * fontScale}px`;
-      }
-    };
-
-    const detailFontFamily = () => {
-      if (fontFamily === '나눔고딕체') {
-        return 'NanumBarunGothic';
-      }
-
-      if (fontFamily === '도현체') {
-        return 'BMDOHYEON';
-      }
-
-      if (fontFamily === '원스토어모바일POP체') {
-        return 'ONE-Mobile-POP';
-      }
-    };
-
-    return `bold ${
-      usage === 'title' ? detailTitleFontSize() : detailsubtitleFontSize()
-    } ${detailFontFamily()}`;
+  const checkDownloadReady = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isDownloadReady) {
+      e.preventDefault();
+      return;
+    }
   };
 
   useEffect(() => {
-    const asyncWrapper = async () => {
-      const canvas = canvasRef.current;
-      const canvasContainer = canvasWrapperRef.current;
-      const downloadButton = downloadRef.current;
+    const canvasContainer = canvasWrapperRef.current;
+    const downloadButton = downloadRef.current;
+    const canvas = canvasRef.current;
 
-      if (!canvas || !canvasContainer || !downloadButton) return;
+    if (!canvas || !canvasContainer || !downloadButton) return;
 
-      const context = canvas.getContext('2d');
-
-      if (!context) return;
-
-      if (backgroundType === 'Color') {
-        context.fillStyle = backgroundColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (backgroundType === 'Gradient') {
-        const gradient = context.createLinearGradient(
-          0,
-          0,
-          canvas.width,
-          canvas.height,
-        );
-        gradient.addColorStop(0, backgroundGradint.start);
-        gradient.addColorStop(1, backgroundGradint.end);
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (backgroundType === 'Image') {
-        const img = await loadBackgroundImage();
-
-        context.fillStyle = backgroundColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
-      }
-
-      context.font = fontStyleBuilder('title');
-      context.textAlign = 'center';
-
-      context.shadowColor = 'rgba(0, 0, 0, 0)';
-      context.shadowOffsetX = 0;
-      context.shadowOffsetY = 0;
-
-      if (backgroundBlur) {
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      if (hasFontShadow) {
-        context.shadowColor = 'black';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
-      }
-
-      context.fillStyle = `${fontColor}`;
-      context.fillText(title, canvas.width / 2, canvas.height / 2);
-
-      context.font = fontStyleBuilder('subtitle');
-      context.fillText(subtitle, canvas.width / 2, (canvas.height * 5) / 7);
-
-      downloadButton.download = 'Thumbnail.png';
-      downloadButton.href = canvas.toDataURL('image/png');
-    };
-
-    asyncWrapper();
-  }, [modalFlag]);
+    downloadButton.download = 'Thumbnail.png';
+    downloadButton.href = canvas.toDataURL('image/png');
+  }, [modalFlag, isDownloadReady]);
 
   return (
     <Modal modalState={modalFlag === 'createThumbnail'}>
@@ -169,32 +41,16 @@ function CreateThumbnail() {
         <h3>썸네일이 생성되었습니다</h3>
         <div className={styles.canvasWrapper} ref={canvasWrapperRef}>
           <div className={styles.canvasRatio}>
-            {imageSize === '16:9' ? (
-              <canvas
-                className={styles.canvas}
-                width="1920"
-                height="1280"
-                ref={canvasRef}
-              />
-            ) : imageSize === '4:3' ? (
-              <canvas
-                className={styles.canvas}
-                width="1024"
-                height="720"
-                ref={canvasRef}
-              />
-            ) : (
-              <canvas
-                className={styles.canvas}
-                width="600"
-                height="600"
-                ref={canvasRef}
-              />
-            )}
+            <Paint setIsDownloadReady={setIsDownloadReady} ref={canvasRef} />
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <a className={styles.downloadButton} ref={downloadRef} href="">
+          <a
+            onClick={checkDownloadReady}
+            className={styles.downloadButton}
+            ref={downloadRef}
+            href=""
+          >
             다운로드
           </a>
         </div>
