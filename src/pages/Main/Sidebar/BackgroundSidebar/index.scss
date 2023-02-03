@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  justify-content: space-between;
 
   width: 20%;
   min-width: 400px;
@@ -17,9 +17,20 @@
   color: $WHITE_000;
 }
 
+.BackgroundControlContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .buttonContainer {
   display: flex;
-  gap: 1rem;
+
+  button {
+    width: 5rem;
+    height: 3rem;
+    border-right: 1px solid $GRAY_ALPHA_000;
+  }
 }
 
 .titleContainer {
@@ -55,6 +66,8 @@
 
   & > button {
     height: 2.5rem;
+
+    border-radius: 5px;
   }
 }
 
@@ -64,29 +77,31 @@
   align-items: center;
   gap: 0.5rem;
 
-  .selected {
+  button {
+    width: 10rem;
+    height: 5rem;
+
+    border-right: 1px solid $GRAY_ALPHA_000;
+  }
+}
+
+.selected {
+  background-color: $GREEN_002;
+
+  &:hover {
     background-color: $GREEN_002;
   }
 }
 
-.FHD_Button {
-  height: 5rem;
-  aspect-ratio: 16/9;
+.firstButton {
+  border-radius: 5px 0 0 5px;
 }
 
-.XGA_Button {
-  height: 5rem;
-  aspect-ratio: 4/3;
-}
-
-.SQUARE_Button {
-  height: 5rem;
-  aspect-ratio: 1/1;
-}
-
-.backgroundTypeSelectButton {
-  height: 5rem;
-  aspect-ratio: 16/9;
+.buttonContainer > .lastButton,
+.buttonWrapper > .lastButton,
+.lastButton {
+  border-radius: 0 5px 5px 0;
+  border: none;
 }
 
 .submitButton {
@@ -99,4 +114,24 @@
 
 .imageInButton {
   width: 30%;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  button {
+    width: 5rem;
+    height: 5rem;
+
+    border-radius: 5px;
+  }
+}
+
+.whiten {
+  filter: brightness(130%);
+}
+
+.darken {
+  filter: brightness(80%);
 }

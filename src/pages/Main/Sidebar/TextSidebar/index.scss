@@ -1,0 +1,118 @@
+@import '~/styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  width: 20%;
+  min-width: 400px;
+  height: 100%;
+  min-height: 100vh;
+
+  padding: 2rem;
+  box-sizing: border-box;
+
+  background-color: $GRAY_001;
+  color: $WHITE_000;
+
+  h2 {
+    font-size: 1.25rem;
+
+    margin-bottom: 1rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.singleInputContainer {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0.5rem 0;
+
+  & > label {
+    display: flex;
+    align-items: center;
+  }
+
+  & > input {
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  & > select {
+    height: 2rem;
+
+    padding: 0.25rem;
+
+    font-weight: bold;
+  }
+}
+
+.submitButtonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  & > button {
+    height: 2.5rem;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  .selected {
+    background-color: $GREEN_002;
+  }
+}
+
+.FHD_Button {
+  height: 5rem;
+  aspect-ratio: 16/9;
+}
+
+.XGA_Button {
+  height: 5rem;
+  aspect-ratio: 4/3;
+}
+
+.SQUARE_Button {
+  height: 5rem;
+  aspect-ratio: 1/1;
+}
+
+.backgroundTypeSelectButton {
+  height: 5rem;
+  aspect-ratio: 16/9;
+}
+
+.submitButton {
+  background-color: $GREEN_000;
+
+  &:hover {
+    background-color: $GREEN_001;
+  }
+}
+
+.imageInButton {
+  width: 30%;
+}

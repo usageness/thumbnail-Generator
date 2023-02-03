@@ -2,7 +2,8 @@ import useThumbnail from 'hooks/useThumbnail';
 import useAppState from 'hooks/useAppState';
 import useModal from 'hooks/useModal';
 import Preview from './Preview';
-import Sidebar from './Sidebar';
+import BackgroundSidebar from './Sidebar/BackgroundSidebar';
+import TextSidebar from './Sidebar/TextSidebar';
 import BackgroundColor from 'components/BackgroundColor';
 import BackgroundImage from 'components/BackgroundImage';
 import CreateThumbnail from 'components/CreateThumbnail';
@@ -19,8 +20,9 @@ function Main() {
       <ModalContext.Provider value={useModal()}>
         <ThumbnailContext.Provider value={useThumbnail()}>
           <AppStateContext.Provider value={useAppState()}>
-            <Sidebar />
+            <BackgroundSidebar />
             <Preview />
+            <TextSidebar />
             <BackgroundColor />
             <BackgroundImage />
             <CreateThumbnail />

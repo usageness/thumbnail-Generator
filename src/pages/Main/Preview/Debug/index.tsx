@@ -12,7 +12,7 @@ function Debug() {
     backgroundImageSrc,
     backgroundColor,
     backgroundGradint,
-    backgroundBlur,
+    backgroundFilter,
     title,
     subtitle,
     fontSize,
@@ -41,7 +41,7 @@ function Debug() {
             backgroundGradint: {backgroundGradint.start} /{' '}
             {backgroundGradint.end}
           </p>
-          <p>backgroundBlur: {backgroundBlur.toString()}</p>
+          <p>backgroundFilter: {backgroundFilter}</p>
           <p>title: {title}</p>
           <p>subtitle: {subtitle}</p>
           <p>fontSize: {fontSize}</p>
