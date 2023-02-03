@@ -18,7 +18,7 @@ const Paint = forwardRef<HTMLCanvasElement, PaintProps>(
       backgroundImageSrc,
       backgroundColor,
       backgroundGradint,
-      backgroundBlur,
+      backgroundFilter,
       title,
       subtitle,
       fontSize,
@@ -81,8 +81,13 @@ const Paint = forwardRef<HTMLCanvasElement, PaintProps>(
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
 
-        if (backgroundBlur) {
+        if (backgroundFilter === 'Whiten') {
           context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+          context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        if (backgroundFilter === 'Darken') {
+          context.fillStyle = 'rgba(0, 0, 0, 0.5)';
           context.fillRect(0, 0, canvas.width, canvas.height);
         }
 
@@ -115,7 +120,7 @@ const Paint = forwardRef<HTMLCanvasElement, PaintProps>(
       backgroundImageSrc,
       backgroundColor,
       backgroundGradint,
-      backgroundBlur,
+      backgroundFilter,
       title,
       subtitle,
       fontSize,

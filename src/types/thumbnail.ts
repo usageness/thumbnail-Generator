@@ -4,7 +4,7 @@ interface ThumbnailData {
   backgroundImageSrc: string;
   backgroundColor: string;
   backgroundGradint: { start: string; end: string };
-  backgroundBlur: boolean;
+  backgroundFilter: 'Whiten' | 'Darken' | null;
   title: string;
   subtitle: string;
   fontSize: 'Small' | 'Normal' | 'Big';

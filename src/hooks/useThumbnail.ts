@@ -32,10 +32,10 @@ export interface useThumbnailReturnValues {
       React.SetStateAction<ThumbnailData['backgroundGradint']>
     >;
   };
-  useBackgroundBlur: () => {
-    backgroundBlur: ThumbnailData['backgroundBlur'];
-    setBackgroundBlur: React.Dispatch<
-      React.SetStateAction<ThumbnailData['backgroundBlur']>
+  useBackgroundFilter: () => {
+    backgroundFilter: ThumbnailData['backgroundFilter'];
+    setBackgroundFilter: React.Dispatch<
+      React.SetStateAction<ThumbnailData['backgroundFilter']>
     >;
   };
   useTitle: () => {
@@ -80,7 +80,7 @@ const defaultThumbnailData: ThumbnailData = {
   backgroundImageSrc: '',
   backgroundColor: '#ffffff',
   backgroundGradint: { start: '#ffffff', end: '#ffffff' },
-  backgroundBlur: false,
+  backgroundFilter: null,
   title: '',
   subtitle: '',
   fontSize: 'Small',
@@ -103,8 +103,8 @@ const useThumbnail = (): useThumbnailReturnValues => {
   const [backgroundGradint, setBackgroundGradint] = useState(
     defaultThumbnailData.backgroundGradint,
   );
-  const [backgroundBlur, setBackgroundBlur] = useState(
-    defaultThumbnailData.backgroundBlur,
+  const [backgroundFilter, setBackgroundFilter] = useState(
+    defaultThumbnailData.backgroundFilter,
   );
   const [title, setTitle] = useState(defaultThumbnailData.title);
   const [subtitle, setSubtitle] = useState(defaultThumbnailData.subtitle);
@@ -136,9 +136,9 @@ const useThumbnail = (): useThumbnailReturnValues => {
       backgroundGradint,
       setBackgroundGradint,
     }),
-    useBackgroundBlur: () => ({
-      backgroundBlur,
-      setBackgroundBlur,
+    useBackgroundFilter: () => ({
+      backgroundFilter,
+      setBackgroundFilter,
     }),
     useTitle: () => ({
       title,

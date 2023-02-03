@@ -15,8 +15,8 @@ interface useThumbnailDataPendingReturnValues {
   setBackgroundColor: undefined;
   backgroundGradint: undefined;
   setBackgroundGradint: undefined;
-  backgroundBlur: undefined;
-  setBackgroundBlur: undefined;
+  backgroundFilter: undefined;
+  setBackgroundFilter: undefined;
   title: undefined;
   setTitle: undefined;
   subtitle: undefined;
@@ -55,9 +55,9 @@ interface useThumbnailDataFulfilledReturnValues {
   setBackgroundGradint: React.Dispatch<
     React.SetStateAction<ThumbnailData['backgroundGradint']>
   >;
-  backgroundBlur: ThumbnailData['backgroundBlur'];
-  setBackgroundBlur: React.Dispatch<
-    React.SetStateAction<ThumbnailData['backgroundBlur']>
+  backgroundFilter: ThumbnailData['backgroundFilter'];
+  setBackgroundFilter: React.Dispatch<
+    React.SetStateAction<ThumbnailData['backgroundFilter']>
   >;
   title: ThumbnailData['title'];
   setTitle: React.Dispatch<React.SetStateAction<ThumbnailData['title']>>;
@@ -94,7 +94,7 @@ const useThumbnailData = ():
       backgroundImageSrc: undefined,
       backgroundColor: undefined,
       backgroundGradint: undefined,
-      backgroundBlur: undefined,
+      backgroundFilter: undefined,
       title: undefined,
       subtitle: undefined,
       fontSize: undefined,
@@ -106,7 +106,7 @@ const useThumbnailData = ():
       setBackgroundImageSrc: undefined,
       setBackgroundColor: undefined,
       setBackgroundGradint: undefined,
-      setBackgroundBlur: undefined,
+      setBackgroundFilter: undefined,
       setTitle: undefined,
       setSubtitle: undefined,
       setFontSize: undefined,
@@ -123,7 +123,7 @@ const useThumbnailData = ():
     useBackgroundImageSrc,
     useBackgroundColor,
     useBackgroundGradint,
-    useBackgroundBlur,
+    useBackgroundFilter,
     useTitle,
     useSubtitle,
     useFontSize,
@@ -137,7 +137,7 @@ const useThumbnailData = ():
   const { backgroundImageSrc, setBackgroundImageSrc } = useBackgroundImageSrc();
   const { backgroundColor, setBackgroundColor } = useBackgroundColor();
   const { backgroundGradint, setBackgroundGradint } = useBackgroundGradint();
-  const { backgroundBlur, setBackgroundBlur } = useBackgroundBlur();
+  const { backgroundFilter, setBackgroundFilter } = useBackgroundFilter();
   const { title, setTitle } = useTitle();
   const { subtitle, setSubtitle } = useSubtitle();
   const { fontSize, setFontSize } = useFontSize();
@@ -154,7 +154,7 @@ const useThumbnailData = ():
         backgroundImageSrc,
         backgroundColor,
         backgroundGradint,
-        backgroundBlur,
+        backgroundFilter,
         title,
         subtitle,
         fontSize,
@@ -182,7 +182,7 @@ const useThumbnailData = ():
     setBackgroundImageSrc(data.backgroundImageSrc);
     setBackgroundColor(data.backgroundColor);
     setBackgroundGradint(data.backgroundGradint);
-    setBackgroundBlur(data.backgroundBlur);
+    setBackgroundFilter(data.backgroundFilter);
     setTitle(data.title);
     setSubtitle(data.subtitle);
     setFontSize(data.fontSize);
@@ -200,7 +200,7 @@ const useThumbnailData = ():
     backgroundImageSrc,
     backgroundColor,
     backgroundGradint,
-    backgroundBlur,
+    backgroundFilter,
     title,
     subtitle,
     fontSize,
@@ -212,7 +212,7 @@ const useThumbnailData = ():
     setBackgroundImageSrc,
     setBackgroundColor,
     setBackgroundGradint,
-    setBackgroundBlur,
+    setBackgroundFilter,
     setTitle,
     setSubtitle,
     setFontSize,
