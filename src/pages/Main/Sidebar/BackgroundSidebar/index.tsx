@@ -15,18 +15,12 @@ function BackgroundSidebar() {
     backgroundType,
     backgroundFilter,
     setBackgroundFilter,
-    saveCurrentConfiguration,
-    loadLatestConfiguration,
   } = useThumbnailData();
   const modalObject = useContext(ModalContext);
 
   if (isLoading || !modalObject) return <></>;
 
-  const {
-    showBackgroundColorModal,
-    showBackgroundImageModal,
-    showCreateThumbnailModal,
-  } = modalObject;
+  const { showBackgroundColorModal, showBackgroundImageModal } = modalObject;
 
   const changeImageSize = (newSize: ThumbnailData['imageSize']) => {
     setImageSize(newSize);
@@ -43,13 +37,8 @@ function BackgroundSidebar() {
     setBackgroundFilter(newType);
   };
 
-  const generateThumbnail = () => {
-    saveCurrentConfiguration();
-    showCreateThumbnailModal();
-  };
-
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.BackgroundControlContainer}>
         <h3>파일 사이즈 선택</h3>
         <div className={styles.buttonContainer}>
@@ -119,13 +108,7 @@ function BackgroundSidebar() {
           </button>
         </div>
       </div>
-      <div className={styles.submitButtonContainer}>
-        <button onClick={loadLatestConfiguration}>최근 설정 불러오기</button>
-        <button className={styles.submitButton} onClick={generateThumbnail}>
-          썸네일 생성
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

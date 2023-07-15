@@ -1,26 +1,9 @@
 @import '~/styles/variables';
 
-.container {
+.TextControlContainer {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-
-  width: 20%;
-  min-width: 400px;
-  height: 100%;
-  min-height: 100vh;
-
-  padding: 2rem;
-  box-sizing: border-box;
-
-  background-color: $GRAY_001;
-  color: $WHITE_000;
-
-  h2 {
-    font-size: 1.25rem;
-
-    margin-bottom: 1rem;
-  }
+  gap: 2rem;
 }
 
 .buttonContainer {
