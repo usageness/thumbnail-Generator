@@ -1,8 +1,8 @@
-import { corsPrefixUrl } from 'constant/constant';
+import { corsPrefixUrl, isCors } from 'constant/constant';
 
 export const loadBackgroundImage = (
   backgroundImageSrc: string,
-  useCors = true,
+  useCors = isCors,
 ) => {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image();

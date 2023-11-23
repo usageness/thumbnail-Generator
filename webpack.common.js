@@ -1,11 +1,21 @@
 const path = require('path');
+const dotenv = require('dotenv');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { DefinePlugin } = require('webpack');
+
+dotenv.config();
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
-  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin()],
+  plugins: [
+    new DefinePlugin({
+      'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -42,6 +52,15 @@ module.exports = {
       stores: path.resolve(__dirname, './src/stores'),
       components: path.resolve(__dirname, './src/components'),
       constant: path.resolve(__dirname, './src/constant'),
+    },
+    fallback: {
+      path: require.resolve('path-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      string_decoder: require.resolve('string_decoder/'),
+      events: require.resolve('events/'),
+      buffer: require.resolve('buffer/'),
     },
   },
   output: {
